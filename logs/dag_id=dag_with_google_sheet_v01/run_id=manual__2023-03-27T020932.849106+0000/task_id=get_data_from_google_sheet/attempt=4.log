@@ -1,0 +1,59 @@
+[2023-03-27T02:40:24.258+0000] {taskinstance.py:1084} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_with_google_sheet_v01.get_data_from_google_sheet manual__2023-03-27T02:09:32.849106+00:00 [queued]>
+[2023-03-27T02:40:24.274+0000] {taskinstance.py:1084} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_with_google_sheet_v01.get_data_from_google_sheet manual__2023-03-27T02:09:32.849106+00:00 [queued]>
+[2023-03-27T02:40:24.275+0000] {taskinstance.py:1282} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-27T02:40:24.276+0000] {taskinstance.py:1283} INFO - Starting attempt 4 of 3
+[2023-03-27T02:40:24.276+0000] {taskinstance.py:1284} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-27T02:40:24.305+0000] {taskinstance.py:1303} INFO - Executing <Task(PythonOperator): get_data_from_google_sheet> on 2023-03-27 02:09:32.849106+00:00
+[2023-03-27T02:40:24.314+0000] {standard_task_runner.py:55} INFO - Started process 1694 to run task
+[2023-03-27T02:40:24.320+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'dag_with_google_sheet_v01', 'get_data_from_google_sheet', 'manual__2023-03-27T02:09:32.849106+00:00', '--job-id', '328', '--raw', '--subdir', 'DAGS_FOLDER/dag_rw_google_sheet.py', '--cfg-path', '/tmp/tmp_91vx5ok']
+[2023-03-27T02:40:24.323+0000] {standard_task_runner.py:83} INFO - Job 328: Subtask get_data_from_google_sheet
+[2023-03-27T02:40:24.718+0000] {task_command.py:388} INFO - Running <TaskInstance: dag_with_google_sheet_v01.get_data_from_google_sheet manual__2023-03-27T02:09:32.849106+00:00 [running]> on host 7785c43b1641
+[2023-03-27T02:40:25.029+0000] {taskinstance.py:1511} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=ThinhHuynh
+AIRFLOW_CTX_DAG_ID=dag_with_google_sheet_v01
+AIRFLOW_CTX_TASK_ID=get_data_from_google_sheet
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-27T02:09:32.849106+00:00
+AIRFLOW_CTX_TRY_NUMBER=4
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-27T02:09:32.849106+00:00
+[2023-03-27T02:40:25.066+0000] {logging_mixin.py:137} INFO - Please visit this URL to authorize this application: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=608356142737-42th0ef7f2pqknf5dqad9j6is3j7aae0.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A60885%2F&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fspreadsheets&state=NFhGBkGnWQaBlppXA8dxAWPeqmjIE5&access_type=offline
+[2023-03-27T02:50:27.657+0000] {local_task_job.py:277} WARNING - State of this instance has been externally set to restarting. Terminating instance.
+[2023-03-27T02:50:28.010+0000] {process_utils.py:133} INFO - Sending Signals.SIGTERM to group 1694. PIDs of all processes in the group: [1694]
+[2023-03-27T02:50:28.018+0000] {process_utils.py:84} INFO - Sending the signal Signals.SIGTERM to group 1694
+[2023-03-27T02:50:28.099+0000] {taskinstance.py:1482} ERROR - Received SIGTERM. Terminating subprocesses.
+[2023-03-27T02:50:28.568+0000] {taskinstance.py:1775} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1523, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1588, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_rw_google_sheet.py", line 41, in insert_master
+    dic = google_sheet.main()
+  File "/opt/airflow/dags/google_sheet.py", line 40, in main
+    creds = flow.run_local_server(port=0)
+  File "/home/airflow/.local/lib/python3.7/site-packages/google_auth_oauthlib/flow.py", line 516, in run_local_server
+    local_server.handle_request()
+  File "/usr/local/lib/python3.7/socketserver.py", line 294, in handle_request
+    ready = selector.select(timeout)
+  File "/usr/local/lib/python3.7/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1483, in signal_handler
+    raise AirflowTermSignal("Task received SIGTERM signal")
+airflow.exceptions.AirflowTermSignal: Task received SIGTERM signal
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1377, in _run_raw_task
+    self._execute_task_with_callbacks(context, test_mode)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1530, in _execute_task_with_callbacks
+    raise AirflowException("Task received SIGTERM signal")
+airflow.exceptions.AirflowException: Task received SIGTERM signal
+[2023-03-27T02:50:28.669+0000] {taskinstance.py:1326} INFO - Marking task as UP_FOR_RETRY. dag_id=dag_with_google_sheet_v01, task_id=get_data_from_google_sheet, execution_date=20230327T020932, start_date=20230327T024024, end_date=20230327T025028
+[2023-03-27T02:50:28.875+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 328 for task get_data_from_google_sheet (Task received SIGTERM signal; 1694)
+[2023-03-27T02:50:28.960+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=1694, status='terminated', exitcode=1, started='02:40:23') (1694) terminated with exit code 1

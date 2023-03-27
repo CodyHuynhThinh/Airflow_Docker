@@ -1,0 +1,24 @@
+[2023-03-20T02:25:03.349+0000] {taskinstance.py:1084} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_with_python_dependencies_v02.get_matplotlib scheduled__2023-03-18T00:00:00+00:00 [queued]>
+[2023-03-20T02:25:03.373+0000] {taskinstance.py:1084} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_with_python_dependencies_v02.get_matplotlib scheduled__2023-03-18T00:00:00+00:00 [queued]>
+[2023-03-20T02:25:03.374+0000] {taskinstance.py:1282} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-20T02:25:03.374+0000] {taskinstance.py:1283} INFO - Starting attempt 1 of 1
+[2023-03-20T02:25:03.375+0000] {taskinstance.py:1284} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-20T02:25:03.407+0000] {taskinstance.py:1303} INFO - Executing <Task(PythonOperator): get_matplotlib> on 2023-03-18 00:00:00+00:00
+[2023-03-20T02:25:03.412+0000] {standard_task_runner.py:55} INFO - Started process 247 to run task
+[2023-03-20T02:25:03.417+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'dag_with_python_dependencies_v02', 'get_matplotlib', 'scheduled__2023-03-18T00:00:00+00:00', '--job-id', '72', '--raw', '--subdir', 'DAGS_FOLDER/dag_with_python_dependencies.py', '--cfg-path', '/tmp/tmpbqk9m8px']
+[2023-03-20T02:25:03.420+0000] {standard_task_runner.py:83} INFO - Job 72: Subtask get_matplotlib
+[2023-03-20T02:25:03.525+0000] {task_command.py:388} INFO - Running <TaskInstance: dag_with_python_dependencies_v02.get_matplotlib scheduled__2023-03-18T00:00:00+00:00 [running]> on host 78bde780398d
+[2023-03-20T02:25:03.685+0000] {taskinstance.py:1511} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=ThinhHuynh
+AIRFLOW_CTX_DAG_ID=dag_with_python_dependencies_v02
+AIRFLOW_CTX_TASK_ID=get_matplotlib
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-18T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2023-03-18T00:00:00+00:00
+[2023-03-20T02:25:03.892+0000] {logging_mixin.py:137} INFO - matplotlib with version: 3.3.3
+[2023-03-20T02:25:03.892+0000] {python.py:177} INFO - Done. Returned value was: None
+[2023-03-20T02:25:03.910+0000] {taskinstance.py:1326} INFO - Marking task as SUCCESS. dag_id=dag_with_python_dependencies_v02, task_id=get_matplotlib, execution_date=20230318T000000, start_date=20230320T022503, end_date=20230320T022503
+[2023-03-20T02:25:03.952+0000] {local_task_job.py:212} INFO - Task exited with return code 0
+[2023-03-20T02:25:03.982+0000] {taskinstance.py:2585} INFO - 0 downstream tasks scheduled from follow-on schedule check

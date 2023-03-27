@@ -1,0 +1,24 @@
+[2023-03-17T07:44:12.005+0000] {taskinstance.py:1084} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: our_dag_with_python_operator_v04.greet manual__2023-03-17T07:44:09.447897+00:00 [queued]>
+[2023-03-17T07:44:12.018+0000] {taskinstance.py:1084} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: our_dag_with_python_operator_v04.greet manual__2023-03-17T07:44:09.447897+00:00 [queued]>
+[2023-03-17T07:44:12.019+0000] {taskinstance.py:1282} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-17T07:44:12.021+0000] {taskinstance.py:1283} INFO - Starting attempt 1 of 6
+[2023-03-17T07:44:12.022+0000] {taskinstance.py:1284} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-17T07:44:12.041+0000] {taskinstance.py:1303} INFO - Executing <Task(PythonOperator): greet> on 2023-03-17 07:44:09.447897+00:00
+[2023-03-17T07:44:12.045+0000] {standard_task_runner.py:55} INFO - Started process 2534 to run task
+[2023-03-17T07:44:12.048+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'our_dag_with_python_operator_v04', 'greet', 'manual__2023-03-17T07:44:09.447897+00:00', '--job-id', '16', '--raw', '--subdir', 'DAGS_FOLDER/create_dags_with_python_operator.py', '--cfg-path', '/tmp/tmpz8fwjcx0']
+[2023-03-17T07:44:12.050+0000] {standard_task_runner.py:83} INFO - Job 16: Subtask greet
+[2023-03-17T07:44:12.138+0000] {task_command.py:388} INFO - Running <TaskInstance: our_dag_with_python_operator_v04.greet manual__2023-03-17T07:44:09.447897+00:00 [running]> on host 213a9e135266
+[2023-03-17T07:44:12.225+0000] {taskinstance.py:1511} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=ThinhHuynh
+AIRFLOW_CTX_DAG_ID=our_dag_with_python_operator_v04
+AIRFLOW_CTX_TASK_ID=greet
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-17T07:44:09.447897+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-17T07:44:09.447897+00:00
+[2023-03-17T07:44:12.244+0000] {logging_mixin.py:137} INFO - Hello world! My name is Thinh Huynh, and I am 20 years old!
+[2023-03-17T07:44:12.245+0000] {python.py:177} INFO - Done. Returned value was: None
+[2023-03-17T07:44:12.255+0000] {taskinstance.py:1326} INFO - Marking task as SUCCESS. dag_id=our_dag_with_python_operator_v04, task_id=greet, execution_date=20230317T074409, start_date=20230317T074412, end_date=20230317T074412
+[2023-03-17T07:44:12.301+0000] {local_task_job.py:212} INFO - Task exited with return code 0
+[2023-03-17T07:44:12.321+0000] {taskinstance.py:2585} INFO - 0 downstream tasks scheduled from follow-on schedule check
