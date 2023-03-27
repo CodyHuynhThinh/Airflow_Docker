@@ -69,35 +69,35 @@ def main():
         print(err)
     return dic
 
-if __name__ == '__main__':
-    dic = main()
+# if __name__ == '__main__':
+#     dic = main()
 
-# Turn dict into DataFrame
-df = pd.DataFrame.from_dict(dic)
-print(df.head())
-
-
-# Load into Postgre
-engine = create_engine("postgresql://postgres:123456@localhost") 
-#engine = create_engine("postgresql://fdobijxb:P4e-KqTZVBR6FhiME3GflCNzn4vIPVng@tiny.db.elephantsql.com:5432/fdobijxb")
-#engine = create_engine("postgresql://kitpdzdt:123456@tiny.db.elephantsql.com:5432/kitpdzdt")
+# # Turn dict into DataFrame
+# df = pd.DataFrame.from_dict(dic)
+# print(df.head())
 
 
-connection = engine.connect()
-metadata = MetaData()
+# # Load into Postgre
+# engine = create_engine("postgresql://postgres:123456@localhost") 
+# #engine = create_engine("postgresql://fdobijxb:P4e-KqTZVBR6FhiME3GflCNzn4vIPVng@tiny.db.elephantsql.com:5432/fdobijxb")
+# #engine = create_engine("postgresql://kitpdzdt:123456@tiny.db.elephantsql.com:5432/kitpdzdt")
 
-columns = ["job_type", "status"]
-tb = Table("tb_type", metadata, autoload=True, autoload_with=engine)
-#lst = df.to_dict("records")
-# stmt = insert(tb)
-# result_proxy = connection.execute(stmt, lst=columns)
 
-for index, row in df.iterrows():
-    stmt = insert(tb).values(job_type=row["Job Type"], status=row["Status"])
-    result_proxy = connection.execute(stmt)
+# connection = engine.connect()
+# metadata = MetaData()
 
-    #tmt = "INSERT INTO job_type (job_type) VALUES (%s)"
-    #val = row["Job Type"]
+# columns = ["job_type", "status"]
+# tb = Table("tb_type", metadata, autoload=True, autoload_with=engine)
+# #lst = df.to_dict("records")
+# # stmt = insert(tb)
+# # result_proxy = connection.execute(stmt, lst=columns)
 
-    #result_proxy = connection.execute(stmt, val)
+# for index, row in df.iterrows():
+#     stmt = insert(tb).values(job_type=row["Job Type"], status=row["Status"])
+#     result_proxy = connection.execute(stmt)
+
+#     #tmt = "INSERT INTO job_type (job_type) VALUES (%s)"
+#     #val = row["Job Type"]
+
+#     #result_proxy = connection.execute(stmt, val)
 
