@@ -1,0 +1,7 @@
+#ignore README.md
+README.dm
+
+#ignore all .log files
+logs/
+minio/
+dags/__pycache__/
