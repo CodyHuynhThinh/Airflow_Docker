@@ -7,6 +7,8 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from google.cloud import bigquery
+from google.oauth2 import service_account
 
 import pandas as pd
 
@@ -14,14 +16,46 @@ from sqlalchemy import create_engine, Table, MetaData, select, insert, delete
 import psycopg2
 
 import os
+import json
 
 
 # If modifying these scopes, delete the file token.json.
-SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+#SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+SCOPES = ['https://www.googleapis.com/auth/cloud-platform']
 
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = '1lhMOvIhZMlcUhmlD1murK_m3AepzREZz8cJR5P7ldd4'
 SAMPLE_RANGE_NAME = 'Task!A1:L'
+key_path = '/opt/airflow/data/credentials_service.json'
+service_account_info = json.load(open(key_path))
+creds = service_account.Credentials.from_service_account_info(service_account_info)
+
+def gg_conn():
+    try:
+        service = build('sheets', 'v4', credentials=creds)
+
+        # Call the Sheets API
+        sheet = service.spreadsheets()
+        result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                    range=SAMPLE_RANGE_NAME).execute()
+        values = result.get('values', [])
+       
+        if not values:
+            print('No data found.')
+            return
+
+        # Add data to dataframe
+        dic = {}
+
+        for i in range(1, 12):
+            lst = []
+            for row in values:
+                lst.append(row[i])
+                dic[lst[0]] = lst[1:]
+        
+    except HttpError as err:
+        print(err)
+    return dic
 
 def main():
     """Shows basic usage of the Sheets API.
@@ -30,14 +64,20 @@ def main():
     creds = None
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
-    # If there are no (valid) credentials available, let the user log in.
+    #If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                '/app/credentials_web.json', SCOPES)
-            creds = flow.run_local_server(port=0)
+                '/opt/airflow/data/credentials.json', SCOPES)
+            #creds = flow.run_local_server(port=0)
+            creds = flow.run_local_server(
+                    host='localhost',
+                    port=8088,
+                    authorization_prompt_message='Please visit this URL: {url}',
+                    success_message='The auth flow is complete; you may close this window.',
+                    open_browser=True)
         # Save the credentials for the next run
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
