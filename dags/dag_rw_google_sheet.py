@@ -3,6 +3,9 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 import pandas as pd
 import psycopg2
+import google.auth
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 
 import google_sheet
 
@@ -42,8 +45,6 @@ def insert_master():
     df = pd.DataFrame.from_dict(dic)
     print(df.head())
 
-
-
 default_args = {
     'owner': 'ThinhHuynh',
     #'retries': 5,
@@ -51,7 +52,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id='dag_with_google_sheet_v02',
+    dag_id='dag_with_google_sheet_v03',
     start_date=datetime(2023, 3, 25),
     schedule_interval='@daily',
     default_args=default_args,
@@ -59,7 +60,7 @@ with DAG(
 ) as dag:
     task1=PythonOperator(
         task_id='get_data_from_google_sheet',
-        python_callable=insert_master
+        python_callable=google_sheet.gg_conn
     )
 
     task1
